@@ -1,17 +1,16 @@
 ## returns the httr response (if outfile is NULL) or the curl response (otherwise)
 sfsget <- function(sfs, path_query, outfile = NULL, progress = FALSE, verbose = FALSE) {
     if (is.null(sfs)) {
-        if (!grepl("auth\\.cgi", path_query)) stop("sfs object must be supplied")
-    } else if (grepl("auth\\.cgi", path_query)) {
-        ## auth
+        if (!grepl("(query|auth)\\.cgi", path_query)) stop("sfs object must be supplied")
+    } else if (grepl("(query|auth)\\.cgi", path_query)) {
+        ## auth or info
         sfs <- NULL
     } else {
         assert_that(inherits(sfs, "sfsclient"))
         if (is.null(sfs$sid)) stop("no session, use `sfs_connect()` first")
     }
     if (!is.null(sfs) && !grepl("^http", path_query)) {
-        path_query <- sub("^/+", "/", paste0("/", path_query)) ## ensure leading /
-        path_query <- paste0(sfs$base_url, path_query)
+        path_query <- paste0(sfs$base_url, sub("^/+", "", path_query)) ## ensure no leading / on path_query, because base_url has it
     }
     u <- parse_url(path_query)
     if (!is.null(sfs$sid)) u$query$`_sid` <- sfs$sid

@@ -2,6 +2,7 @@
 
 export(sfs_connect)
 export(sfs_download)
+export(sfs_info)
 export(sfs_list)
 export(sfs_list_share)
 export(sfs_verbose)
