@@ -26,7 +26,6 @@ sfsget <- function(sfs, path_query, outfile = NULL, progress = FALSE, verbose = 
         ## download
         h <- curl::new_handle(Cookie = "type=tunnel; stay_login=0;")
         ##h <- curl::handle_setheaders(h, Cookie = "type=tunnel; stay_login=0;")
-u <- "https://untan.gl/images/su_title.png"
         if (isTRUE(progress)) h <- curl::handle_setopt(h, noprogress = FALSE, progressfunction = progress_bar("down", stdout())) ##mode = "wb", 
         rsp <- curl::curl_fetch_disk(u, path = outfile, handle = h)
         if (rsp$status_code != 200) warning("status code not 200")
