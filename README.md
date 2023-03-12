@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/scienceuntangled/sfsclient/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/scienceuntangled/sfsclient/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
+An R package providing a minimal Synology File Station client.
+
 ## Installation
 
 ``` r
