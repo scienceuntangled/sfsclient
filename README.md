@@ -19,7 +19,8 @@ remotes::install_github("scienceuntangled/sfsclient")
 ``` r
 library(sfsclient)
 
-sfs <- sfs_connect("https://my.sfs-domain.com/webapi")
+## provide user and pass directly, or via environment variables SFS_USER and SFS_PASS
+sfs <- sfs_connect("https://my.sfs-domain.com/webapi", user = "myusername", pass = "mypassword")
 
 ## list shared folders
 sfs_list_share(sfs)
