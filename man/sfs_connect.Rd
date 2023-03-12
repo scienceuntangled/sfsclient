@@ -4,7 +4,7 @@
 \alias{sfs_connect}
 \title{Connect to a Synology File Station}
 \usage{
-sfs_connect(url, user, pass, verbose = sfs_verbose())
+sfs_connect(url, user, pass, version = 0L, verbose = sfs_verbose())
 }
 \arguments{
 \item{url}{string: URL to connect to, e.g. "https://my.sfs.com/webapi/"}
@@ -12,6 +12,8 @@ sfs_connect(url, user, pass, verbose = sfs_verbose())
 \item{user}{string: username. If missing, will be taken from the environment variable `SFS_USER`}
 
 \item{pass}{string: password. If missing, will be taken from the environment variable `SFS_PASS`}
+
+\item{version}{integer: SYNO.Api.Auth version to use. If 0, `sfs_info(url)$SYNO.API.Auth$maxVersion` will be called to determine the appropriate value to use (but adds a second or two to the connection time)}
 
 \item{verbose}{logical: give debug info?}
 }
