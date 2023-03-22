@@ -33,16 +33,19 @@ sfs_list_share <- function(sfs, additional = c(), verbose = sfs_verbose()) {
 #' @return A data.frame or `NULL`
 #'
 #' @export
-sfs_list <- function(sfs, path, additional = c(), verbose = sfs_verbose()) {
+sfs_list <- function(sfs, path, additional = c("time"), verbose = sfs_verbose()) {
     url <- paste0("entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\"", path, "\"")
     if (length(additional) > 0) {
         url <- paste0(url, "&additional=", sqb(additional))
     }
     rsp <- sfsget(sfs, url, verbose = verbose)
     if (status_code(rsp) == 200) {
-        fromJSON(content(rsp, as = "text"), simplifyDataFrame = TRUE)$data$files
-    } else {
+        out <- fromJSON(content(rsp, as = "text"), simplifyDataFrame = TRUE, flatten = TRUE)$data$files
+        names(out) <- sub("^additional\\.", "", names(out))
+        names(out) <- gsub("\\.+", "_", sub("^time\\.", "", names(out)))
+        for (tmc in intersect(c("atime", "crtime", "ctime", "mtime"), names(out))) out[[tmc]] <- as.POSIXct(out[[tmc]], origin = "1970-01-01")
+        out
+  } else {
         NULL
     }
 }
-

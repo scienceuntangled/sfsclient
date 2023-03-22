@@ -4,7 +4,7 @@
 \alias{sfs_list}
 \title{List files in a shared folder}
 \usage{
-sfs_list(sfs, path, additional = c(), verbose = sfs_verbose())
+sfs_list(sfs, path, additional = c("time"), verbose = sfs_verbose())
 }
 \arguments{
 \item{sfs}{sfsclient: as returned by [sfs_connect()]}
