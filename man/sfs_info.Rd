@@ -7,12 +7,12 @@
 sfs_info(url, verbose = sfs_verbose())
 }
 \arguments{
-\item{url}{string: URL to connect to, e.g. "https://my.sfs.com/webapi/"}
+\item{url}{string or sfsclient: URL to connect to, e.g. "https://my.sfs.com/webapi/", or an sfsclient object}
 
 \item{verbose}{logical: give debug info?}
 }
 \value{
-An sfsclient object
+A list
 }
 \description{
 Retrieve API information from a Synology File Station

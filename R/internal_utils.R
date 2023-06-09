@@ -21,6 +21,11 @@ sfsget <- function(sfs, path_query, outfile = NULL, progress = FALSE, verbose = 
         if (isTRUE(progress)) rgs <- c(rgs, list(httr::progress()))
         rsp <- do.call(GET, rgs)
         if (status_code(rsp) != 200) warning("status code not 200")
+        chk <- tryCatch(fromJSON(content(rsp, as = "text"), simplifyDataFrame = TRUE, flatten = TRUE), error = function(e) list())
+        if ("success" %in% names(chk) && !isTRUE(chk$success)) {
+            errcode <- if ("error" %in% names(chk) && "code" %in% names(chk$error)) chk$error$code else "unknown"
+            warning("request was unsuccessful, error code:", errcode)
+        }
     } else {
         ## download
         h <- curl::new_handle(Cookie = "type=tunnel; stay_login=0;")
