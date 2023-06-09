@@ -7,6 +7,7 @@
 sfs_download(
   sfs,
   path,
+  out_dir,
   mode = "download",
   progress = TRUE,
   verbose = sfs_verbose()
@@ -16,6 +17,8 @@ sfs_download(
 \item{sfs}{sfsclient: as returned by [sfs_connect()]}
 
 \item{path}{character: one or more file or folder paths (each starting with a shared folder. Probably needs to start with a "/")}
+
+\item{out_dir}{string: destination directory. If not provided, a temporary directory will be used}
 
 \item{mode}{string: "download" (default) or "open"}
 
