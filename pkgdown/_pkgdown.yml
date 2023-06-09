@@ -1,0 +1,10 @@
+template:
+  bootstrap: 5
+  bootswatch: yeti
+  bslib:
+    base_font: {google: "Lato"}
+    heading_font: {google: "Abyssinica SIL"}
+    code_font: {google: "Source Code Pro"}
+    fg: "#333333"
+    bg: "#FFFFFF"
+    primary: "#214174"
